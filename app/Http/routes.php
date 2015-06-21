@@ -13,5 +13,5 @@
 
 Route::get('/', array(
     'use'   =>  'home',
-    'uses'  =>  'Home@index'
+    'uses'  =>  'HomeController@index'
 ));
