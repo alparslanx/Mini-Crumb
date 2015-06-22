@@ -39,10 +39,9 @@ class UserController extends Controller
                 ));
 
 
-                $activationCode = $user->getActivationCode();
+                //$activationCode = $user->getActivationCode();
                 //TODO
                 //Kayıt olduktan sonra aktivasyon kodu mail olarak gönderilecek. Şuanlık otomatik aktif oluyor üyeler.
-
                 return redirect()->route('home');
 
             }
