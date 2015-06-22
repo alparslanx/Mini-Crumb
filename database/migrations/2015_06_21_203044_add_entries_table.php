@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEntryTable extends Migration
+class AddEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class AddEntryTable extends Migration
      */
     public function up()
     {
-        Schema::create('entry', function (Blueprint $table) {
+        Schema::create('entries', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->integer('topicid');
-            $table->integer('userid');
-            $table->text('entry');
+            $table->integer('topic_id');
+            $table->integer('user_id');
+            $table->text('content');
             $table->timestamps();
             $table->enum('status', ['0', '1', '2']);
         });
@@ -30,6 +30,6 @@ class AddEntryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('entry');
+        Schema::drop('entries');
     }
 }

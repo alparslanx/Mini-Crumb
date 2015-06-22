@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTopicTable extends Migration
+class AddTopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class AddTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('sef',90);
-            $table->integer('userid');
+            $table->integer('user_id');
             $table->timestamps();
             $table->enum('status', ['0', '1', '2']);
         });
@@ -29,6 +29,6 @@ class AddTopicTable extends Migration
      */
     public function down()
     {
-        Schema::drop('topic');
+        Schema::drop('topics');
     }
 }
