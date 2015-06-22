@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
-use Cartalyst\Sentry\Users;
-use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -18,49 +15,8 @@ class UserController extends Controller
      * @return Response
      */
 
-    public function register(Request $request)
+    public function register()
     {
-
-        if ($request->isMethod('post')) {
-
-
-            $email = $request->input('email');
-            $username = $request->input('username');
-            $password = $request->input('password');
-
-            try
-            {
-
-                $user = Sentry::register(array(
-                    'email'    => $email,
-                    'username' => $username,
-                    'password' => $password,
-                    'activated' => 1
-                ));
-
-
-                //$activationCode = $user->getActivationCode();
-                //TODO
-                //Kayıt olduktan sonra aktivasyon kodu mail olarak gönderilecek. Şuanlık otomatik aktif oluyor üyeler.
-                return redirect()->route('home');
-
-            }
-            catch (\Cartalyst\Sentry\Users\LoginRequiredException $e)
-            {
-                return redirect()->route('register')->with('error', 'E-Mail adresi alanı boş olmamalı.');
-            }
-            catch (\Cartalyst\Sentry\Users\PasswordRequiredException $e)
-            {
-                return redirect()->route('register')->with('error', 'Şifre alanı boş olmamalı.');
-            }
-            catch (\Cartalyst\Sentry\Users\UserExistsException $e)
-            {
-                return redirect()->route('register')->with('error', 'Böyle bir kullancı sistemde kayıtlı');
-            }
-
-
-        }
-
         return view('user.register');
     }
 
@@ -70,52 +26,8 @@ class UserController extends Controller
      * @return Response
      */
 
-    public function login(Request $request)
+    public function login()
     {
-
-        if ($request->isMethod('post')) {
-
-            $email = $request->input('email');
-            $password = $request->input('password');
-
-            try
-            {
-                // Login credentials
-                $credentials = array(
-                    'email'    => $email,
-                    'password' => $password,
-                );
-
-                // Authenticate the user
-                $user = Sentry::authenticate($credentials, false);
-                return redirect()->route('home');
-
-            }
-            catch (\Cartalyst\Sentry\Users\LoginRequiredException $e)
-            {
-                return redirect()->route('login')->with('error','E-Mail adresi alanı zorunludur');
-            }
-            catch (\Cartalyst\Sentry\Users\PasswordRequiredException $e)
-            {
-                return redirect()->route('login')->with('error','Şifre alanı zorunludur');
-            }
-            catch (\Cartalyst\Sentry\Users\WrongPasswordException $e)
-            {
-                return redirect()->route('login')->with('error','Kullancı adınız doğru ancak şifreniz yanlış.');
-            }
-            catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
-            {
-                return redirect()->route('login')->with('error','Böyle bir kullanıcı bulunamadı');
-            }
-            catch (\Cartalyst\Sentry\Users\UserNotActivatedException $e)
-            {
-                return redirect()->route('login')->with('error','E-posta adresinize gelen aktivasyon kodu ile üyeliğinizi aktif etmelisniiz.');
-            }
-
-
-
-        }
-
         return view('user.login');
     }
 
