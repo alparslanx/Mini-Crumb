@@ -4,7 +4,6 @@
 <div class="row">
 
     @if (session('error'))
-asdasd
         <div data-alert class="alert-box alert round">
             {{ session('error') }}
             <a href="#" class="close">&times;</a>
