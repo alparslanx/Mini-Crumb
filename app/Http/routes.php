@@ -12,6 +12,17 @@
 */
 
 Route::get('/', array(
-    'use'   =>  'home',
+    'as'   =>  'home',
     'uses'  =>  'HomeController@index'
+));
+
+
+Route::any('/register', array(
+    'as'   =>  'register',
+    'uses'  =>  'UserController@register'
+));
+
+Route::any('/login', array(
+    'as'   =>  'login',
+    'uses'  =>  'UserController@login'
 ));
