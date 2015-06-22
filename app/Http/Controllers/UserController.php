@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Cartalyst\Sentry\Users;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -15,8 +18,49 @@ class UserController extends Controller
      * @return Response
      */
 
-    public function register()
+    public function register(Request $request)
     {
+
+        if ($request->isMethod('post')) {
+
+
+            $email = $request->input('email');
+            $username = $request->input('username');
+            $password = $request->input('password');
+
+            try
+            {
+
+                $user = Sentry::register(array(
+                    'email'    => $email,
+                    'username' => $username,
+                    'password' => $password,
+                    'activated' => 1
+                ));
+
+
+                $activationCode = $user->getActivationCode();
+                //TODO
+                //Kayıt olduktan sonra aktivasyon kodu mail olarak gönderilecek. Şuanlık otomatik aktif oluyor üyeler.
+
+                return Redirect::to('/');
+
+            }
+            catch (\Cartalyst\Sentry\Users\LoginRequiredException $e)
+            {
+                return redirect('register')->with('error', 'E-Mail adresi alanı boş olmamalı.');
+            }
+            catch (\Cartalyst\Sentry\Users\PasswordRequiredException $e)
+            {
+                return redirect('register')->with('error', 'Şifre alanı boş olmamalı.');
+            }
+            catch (\Cartalyst\Sentry\Users\UserExistsException $e)
+            {
+                return redirect('register')->with('error', 'Böyle bir kullancı sistemde kayıtlı');
+            }
+
+
+        }
         return view('user.register');
     }
 
