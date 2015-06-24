@@ -11,4 +11,9 @@ class Topic extends Model
 
     protected $fillable = ['sef'];
 
+    public function getEntries()
+    {
+        return $this->hasMany('App\Entry');
+    }
+
 }

@@ -11,4 +11,9 @@ class Entry extends Model
 
     protected $fillable = ['content', 'status'];
 
+    public function getUser()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
 }
