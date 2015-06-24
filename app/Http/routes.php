@@ -16,7 +16,6 @@ Route::get('/', array(
     'uses'  =>  'HomeController@index'
 ));
 
-
 Route::any('/register', array(
     'as'   =>  'register',
     'uses'  =>  'UserController@register'
@@ -26,3 +25,14 @@ Route::any('/login', array(
     'as'   =>  'login',
     'uses'  =>  'UserController@login'
 ));
+
+Route::group(['prefix' => 'user'], function()
+{
+
+    Route::get('/{username}', [
+        'as' => 'user_show',
+        'uses' => 'UserController@show'
+    ]);
+
+});
+

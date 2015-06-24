@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Cartalyst\Sentry\Users;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 class UserController extends Controller
 {
     /**
@@ -92,23 +93,18 @@ class UserController extends Controller
         return view('user.login');
     }
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($username)
     {
-        //
+
+        $user = User::where('username',$username)->firstOrFail()->toArray();
+
+        dd($user);
+
     }
     /**
      * Show the form for editing the specified resource.
