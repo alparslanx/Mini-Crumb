@@ -11,6 +11,7 @@ class EntryTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Models\Entry::class, 50)->create();
+
     }
 }

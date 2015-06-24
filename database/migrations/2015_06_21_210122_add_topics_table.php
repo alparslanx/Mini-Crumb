@@ -15,6 +15,7 @@ class AddTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
+            $table->string('title');
             $table->string('sef',90);
             $table->integer('user_id');
             $table->timestamps();

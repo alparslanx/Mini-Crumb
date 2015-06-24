@@ -9,7 +9,7 @@ class Topic extends Model
 
     protected $table = 'topics';
 
-    protected $fillable = ['sef'];
+    protected $fillable = ['sef','title'];
 
     public function getEntries()
     {

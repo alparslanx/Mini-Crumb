@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,11 +13,20 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+$factory->define(App\Models\Topic::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'sef' => $faker->word,
+        'title' => $faker->sentence,
+        'user_id' => 1,
+        'status' => 3
+    ];
+});
+
+$factory->define(App\Models\Entry::class, function ($faker) {
+    return [
+        'topic_id' => 1,
+        'content' => $faker->text,
+        'user_id' => 1,
+        'status' => 3
     ];
 });
