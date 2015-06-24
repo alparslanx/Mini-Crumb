@@ -1,10 +1,18 @@
 @extends('app')
 @section('content')
 
-<div class="row">
+    <div class="row">
 
-    <div>
-        {!! Form::open(array('route' => 'register', 'method' => 'POST')) !!}
+        @if (session('error'))
+            <div data-alert class="alert-box alert round">
+                {{ session('error') }}
+                <a href="#" class="close">&times;</a>
+            </div>
+
+        @endif
+
+        <div>
+            {!! Form::open(array('route' => 'register', 'method' => 'POST')) !!}
             <div>
                 {!! Form::label('email', 'E-Mail Adresi') !!}
                 {!! Form::text('email') !!}
@@ -19,7 +27,13 @@
                 {!! Form::label('password', 'Şifre') !!}
                 {!! Form::password('password') !!}
             </div>
-        {!! Form::close() !!}
+
+            <div>
+
+                {!! Form::submit('Gonder') !!}
+
+            </div>
+            {!! Form::close() !!}
+        </div>
     </div>
-</div>
 @endsection
