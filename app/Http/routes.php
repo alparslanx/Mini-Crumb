@@ -36,3 +36,12 @@ Route::group(['prefix' => 'user'], function()
 
 });
 
+Route::group(['prefix' => 'admin'], function()
+{
+
+    Route::get('/index', [
+        'as' => 'admin_home',
+        'uses' => 'AdminController@index'
+    ]);
+
+});
